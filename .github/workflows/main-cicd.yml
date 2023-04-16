@@ -61,13 +61,46 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - name: Slack Notification
+      - name: send notification if success
+        if: ${{ success() }}
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_CHANNEL: githubactions-poc
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'The pipeline Is Completed Successfully'
-          SLACK_TITLE: React Project CI/CD
-          SLACK_USERNAME: gaurav.talele
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+            SLACK_ICON: https://github.com/rtCamp.png?size=48
+            SLACK_CHANNEL: githubactions-poc
+            SLACK_COLOR: ${{ job.status }}
+            SLACK_MESSAGE: 'The pipeline Is Completed Successfully'
+            SLACK_TITLE: React Project CI/CD
+            SLACK_USERNAME: gaurav.talele
+            SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        with:
+            status: 'success'
+            message: 'The build and deploy job succeeded'
+            channel: githubactions-poc
+
+      - name: send notification if failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+            SLACK_ICON: https://github.com/rtCamp.png?size=48
+            SLACK_CHANNEL: githubactions-poc
+            SLACK_COLOR: ${{ job.status }}
+            SLACK_MESSAGE: 'The pipeline Is Completed Successfully'
+            SLACK_TITLE: React Project CI/CD
+            SLACK_USERNAME: gaurav.talele
+            SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        with:
+            status: 'failure'
+            message: 'The build and deploy job not succeeded'
+            channel: githubactions-poc
+
+
+    #   - name: Slack Notification
+    #     uses: rtCamp/action-slack-notify@v2
+    #     env:
+    #       SLACK_ICON: https://github.com/rtCamp.png?size=48
+    #       SLACK_CHANNEL: githubactions-poc
+    #       SLACK_COLOR: ${{ job.status }}
+    #       SLACK_MESSAGE: 'The pipeline Is Completed Successfully'
+    #       SLACK_TITLE: React Project CI/CD
+    #       SLACK_USERNAME: gaurav.talele
+    #       SLACK_WEBHOOK: https://hooks.slack.com/services/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
