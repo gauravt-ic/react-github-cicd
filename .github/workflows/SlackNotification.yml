@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Send message to Slack
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_COLOR: ${{ job.status }}
         uses: rtCamp/action-slack-notify@v2.2.0
         with:
