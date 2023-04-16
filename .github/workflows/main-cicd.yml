@@ -87,6 +87,24 @@ jobs:
             SLACK_USERNAME: gaurav.talele
             SLACK_WEBHOOK: https://hooks.slack.com/services/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
 
+      - name: Send Teams notification
+        uses: microsoft/teams-notification@v1
+        if: ${{ env.WORKFLOW_CONCLUSION }} == 'success' 
+        with:
+            webhook-url: https://indigochart.webhook.office.com/webhookb2/c612a1da-d845-4af4-99df-8aa5f50c8453@7ea23193-ae2b-42c9-9252-83a6d5c5547f/IncomingWebhook/bc75a012e7e04361af09a3ab838b399c/1e7bdf5b-0e05-49d1-8047-bbddd8ef8159
+            title: Deployment Sucessful
+            message: |
+                The deployment of ${{ github.repository }} is Sucessful
+
+      - name: Send Teams notification
+        uses: microsoft/teams-notification@v1
+        if: ${{ env.WORKFLOW_CONCLUSION }} == 'failure' 
+        with:
+            webhook-url: https://indigochart.webhook.office.com/webhookb2/c612a1da-d845-4af4-99df-8aa5f50c8453@7ea23193-ae2b-42c9-9252-83a6d5c5547f/IncomingWebhook/bc75a012e7e04361af09a3ab838b399c/1e7bdf5b-0e05-49d1-8047-bbddd8ef8159
+            title: Deployment Failed
+            message: |
+              The deployment of ${{ github.repository }} is Failed
+
     #   - name: Slack Notification
     #     uses: rtCamp/action-slack-notify@v2
     #     env:
