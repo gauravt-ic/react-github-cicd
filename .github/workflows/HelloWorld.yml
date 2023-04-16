@@ -1,4 +1,4 @@
-name: Check Job Status
+name: Check Job Status 2
 
 on:
   push:
@@ -24,4 +24,4 @@ jobs:
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
       - name: show conclusion 2
-        run: echo ${{ env.WORKFLOW_CONCLUSION }}
+        run: echo "${{ env.WORKFLOW_CONCLUSION }}"
