@@ -76,7 +76,7 @@ jobs:
             SLACK_WEBHOOK: https://hooks.slack.com/services/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
 
       - name: send notification if failure
-        if: env.WORKFLOW_CONCLUSION == 'failure' 
+        if: ${{ env.WORKFLOW_CONCLUSION }} == 'failure' 
         uses: rtCamp/action-slack-notify@v2
         env:
             SLACK_ICON: https://github.com/rtCamp.png?size=48
