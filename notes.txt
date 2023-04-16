@@ -8,6 +8,8 @@ search incoming webhooks
 
 https://hooks.slack.com/services/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
 
+curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+
 
 
 Access Token

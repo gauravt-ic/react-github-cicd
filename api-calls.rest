@@ -1,0 +1,6 @@
+POST https://hooks.slack.com/services/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 HTTP/1.1
+Content-Type: application/json
+
+{
+    "text":"Hello, World!"
+}
