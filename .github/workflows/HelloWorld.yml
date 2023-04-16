@@ -24,4 +24,4 @@ jobs:
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
       - name: show conclusion
-        run: env.WORKFLOW_CONCLUSION == 'failure'
+        run: echo env.WORKFLOW_CONCLUSION
