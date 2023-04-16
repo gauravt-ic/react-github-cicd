@@ -15,7 +15,7 @@ jobs:
             SLACK_MESSAGE: 'Post Content :rocket:'
             SLACK_TITLE: Post Title
             SLACK_USERNAME: gaurav.talele
-            SLACK_WEBHOOK: https://hooks.slack.com/services/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
+            SLACK_WEBHOOK: https://hooks.slack.com/services/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
 
     #   - name: Send message to Slack
     #     env:
