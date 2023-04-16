@@ -60,22 +60,22 @@ jobs:
 #           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
 #           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-  notify:
-    needs:
-      - build
-      - test
-    #   - deploy
+#   notify:
+#     needs:
+#       - build
+#       - test
+#     #   - deploy
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    # Only run if any of the previous jobs fail or the pipeline is successful
-    if: always()
+#     # Only run if any of the previous jobs fail or the pipeline is successful
+#     if: always()
 
-    steps:
-      - name: Notify
-        uses: rtCamp/action-slack-notify@v2.2.0
-        with:
-          status: ${{ job.status }}
-          message: 'The pipeline {{ job.status }}!'
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#     steps:
+#       - name: Notify
+#         uses: rtCamp/action-slack-notify@v2.2.0
+#         with:
+#           status: ${{ job.status }}
+#           message: 'The pipeline {{ job.status }}!'
+#         env:
+#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
