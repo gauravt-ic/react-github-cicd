@@ -1,11 +1,11 @@
 name: CI/CD Pipeline
 
-on:
-    workflow_dispatch:
 # on:
-#   push:
-#     branches:
-#       - main
+#     workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -64,7 +64,7 @@ jobs:
     if: always()
     steps:
       - name: send notification if success
-        if: ${{ success() }}
+        if: env.WORKFLOW_CONCLUSION == 'success' 
         uses: rtCamp/action-slack-notify@v2
         env:
             SLACK_ICON: https://github.com/rtCamp.png?size=48
@@ -74,13 +74,9 @@ jobs:
             SLACK_TITLE: React Project CI/CD
             SLACK_USERNAME: gaurav.talele
             SLACK_WEBHOOK: https://hooks.slack.com/services/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
-        with:
-            status: 'success'
-            message: 'The build and deploy job succeeded'
-            channel: githubactions-poc
 
       - name: send notification if failure
-        if: ${{ failure() }}
+        if: env.WORKFLOW_CONCLUSION == 'failure' 
         uses: rtCamp/action-slack-notify@v2
         env:
             SLACK_ICON: https://github.com/rtCamp.png?size=48
@@ -90,11 +86,6 @@ jobs:
             SLACK_TITLE: React Project CI/CD
             SLACK_USERNAME: gaurav.talele
             SLACK_WEBHOOK: https://hooks.slack.com/services/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
-        with:
-            status: 'failure'
-            message: 'The build and deploy job not succeeded'
-            channel: githubactions-poc
-
 
     #   - name: Slack Notification
     #     uses: rtCamp/action-slack-notify@v2
