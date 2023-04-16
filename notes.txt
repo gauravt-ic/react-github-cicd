@@ -1,1 +1,11 @@
 npx create-react-app my-react-app
+
+
+slack incoming wehooks 
+
+https://slack.com/apps
+search incoming webhooks 
+
+https://hooks.slack.com/services/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
+
+
