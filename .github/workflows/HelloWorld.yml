@@ -23,5 +23,5 @@ jobs:
     needs: [job1, job2]
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
-      - name: show conclusion
-        run: echo env.WORKFLOW_CONCLUSION
+      - name: show conclusion 2
+        run: echo ${{ env.WORKFLOW_CONCLUSION }}
