@@ -10,7 +10,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_COLOR: ${{ job.status }}
-        uses: rtCamp/action-slack-notify@v2.1.0
+        uses: rtCamp/action-slack-notify@v2.2.0
         with:
           status: ${{ job.status }}
           SLACK_CHANNEL: githubactions-poc
