@@ -60,22 +60,25 @@ jobs:
 #           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
 #           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-#   notify:
-#     needs:
-#       - build
-#       - test
-#     #   - deploy
+  notify:
+    needs:
+      - build
+      - test
+    #   - deploy
 
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-#     # Only run if any of the previous jobs fail or the pipeline is successful
-#     if: always()
+    # Only run if any of the previous jobs fail or the pipeline is successful
+    if: always()
 
-#     steps:
-#       - name: Notify
-#         uses: rtCamp/action-slack-notify@v2.2.0
-#         with:
-#           status: ${{ job.status }}
-#           message: 'The pipeline {{ job.status }}!'
-#         env:
-#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: githubactions-poc
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'The pipeline {{ job.status }}!'
+          SLACK_TITLE: React Project CI/CD
+          SLACK_USERNAME: gaurav.talele
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
