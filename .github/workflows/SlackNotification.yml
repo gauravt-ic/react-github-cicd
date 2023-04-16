@@ -1,0 +1,15 @@
+name: SlackNotification
+
+on: workflow_dispatch
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: rtCamp/action-slack-notify@v2.1.0
+        with:
+          status: ${{ job.status }}
+          fields: repository,commit,author,action,eventName,workflow,ref
