@@ -1,0 +1,81 @@
+name: CI/CD Pipeline
+
+# Trigger the pipeline on push events to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: build
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Test
+        run: yarn test
+
+#   deploy:
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Download artifacts
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: build-artifacts
+
+#       - name: Deploy to S3 bucket
+#         uses: jakejarvis/s3-sync-action@v0.5.0
+#         with:
+#           args: --acl public-read --delete
+#         env:
+#           AWS_S3_BUCKET: my-bucket-name
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  notify:
+    needs:
+      - build
+      - test
+    #   - deploy
+
+    runs-on: ubuntu-latest
+
+    # Only run if any of the previous jobs fail or the pipeline is successful
+    if: always()
+
+    steps:
+      - name: Notify
+        uses: rtCamp/action-slack-notify@v2.2.0
+        with:
+          status: ${{ job.status }}
+          message: 'The pipeline {{ job.status }}!'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
