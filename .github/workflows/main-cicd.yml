@@ -23,7 +23,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: build
+    # needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: test
+    # needs: test
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
@@ -84,7 +84,7 @@ jobs:
             SLACK_ICON: https://github.com/rtCamp.png?size=48
             SLACK_CHANNEL: githubactions-poc
             SLACK_COLOR: ${{ job.status }}
-            SLACK_MESSAGE: 'The pipeline Is Completed Successfully'
+            SLACK_MESSAGE: 'The pipeline Is NOT Completed Successfully'
             SLACK_TITLE: React Project CI/CD
             SLACK_USERNAME: gaurav.talele
             SLACK_WEBHOOK: https://hooks.slack.com/services/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
