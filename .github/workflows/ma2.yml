@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
-        uses: some-action-to-deploy-to-production@v1
         with:
           environment: production
 
