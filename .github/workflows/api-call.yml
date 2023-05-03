@@ -17,7 +17,7 @@ jobs:
           response=$(curl https://reqres.in/api/users?page=2)
 
           # Extract the second object from the response using jq
-          second_position=$(echo "$response" | jq '.data[1]')
+          second_position=$(echo "$response" | jq '.data[1].email')
 
           # Print the second object
           echo "$second_position"
