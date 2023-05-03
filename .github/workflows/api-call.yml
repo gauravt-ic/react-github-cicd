@@ -1,0 +1,23 @@
+name: Call Reqres API and Extract Data
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get -y install jq
+
+      - name: Call Reqres API
+        run: |
+          response=$(curl https://reqres.in/api/users?page=2)
+
+          # Extract the second object from the response using jq
+          second_position=$(echo "$response" | jq '.data[1]')
+
+          # Print the second object
+          echo "$second_position"
