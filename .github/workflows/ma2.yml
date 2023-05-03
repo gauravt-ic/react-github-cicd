@@ -1,0 +1,32 @@
+name: Ma2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+  deploy:
+    needs: [build, approval]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: some-action-to-deploy-to-production@v1
+        with:
+          environment: production
+
+  approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request approval
+        uses: peter-evans/approval-action@v2.1.0
+        with:
+          token: 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
+          message: "Please approve this deployment to production."
+          reviewers: "Gaurav9969351313"
